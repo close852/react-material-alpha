@@ -7,7 +7,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Link color="inherit" href="#">
                 Your Websitess
       </Link>{' '}
             {new Date().getFullYear()}
@@ -19,11 +19,9 @@ function Copyright() {
 
 export default function Footer() {
     return (
-        <footer className="footer">
-            <Container maxWidth="sm">
-                <Typography variant="body1" align="center">My sticky footer can be found here.</Typography>
-                <Copyright />
-            </Container>
-        </footer>
+                <Container maxWidth="sm">
+                    <Typography variant="body1" align="center">My sticky footer can be found here.</Typography>
+                    <Copyright />
+                </Container>
     );
 }

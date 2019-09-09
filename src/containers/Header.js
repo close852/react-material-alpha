@@ -9,67 +9,69 @@ import Typography from '@material-ui/core/Typography';
 import { IconButton, InputBase, Menu, MenuItem, Badge } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const useStyles = makeStyles(theme => ({
-
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
-    },
-    searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputRoot: {
-        color: 'inherit',
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: 120,
-            '&:focus': {
-                width: 200,
-            },
-        },
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-
-}));
-
 
 
 function Header({ auth, history }) {
-    console.log(history);
 
     const keyword = '';
     const menuName = '메인화면';
+    const useStyles = makeStyles(theme => ({
+
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+        search: {
+            position: 'relative',
+            borderRadius: theme.shape.borderRadius,
+            backgroundColor: fade(theme.palette.common.white, 0.15),
+            '&:hover': {
+                backgroundColor: fade(theme.palette.common.white, 0.25),
+            },
+            marginLeft: 0,
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                marginLeft: theme.spacing(1),
+                width: 'auto',
+            },
+        },
+        searchIcon: {
+            width: theme.spacing(7),
+            height: '100%',
+            position: 'absolute',
+            pointerEvents: 'none',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        inputRoot: {
+            color: 'inherit',
+        },
+        inputInput: {
+            padding: theme.spacing(1, 1, 1, 7),
+            transition: theme.transitions.create('width'),
+            width: '100%',
+            [theme.breakpoints.up('sm')]: {
+                width: 120,
+                '&:focus': {
+                    width: 200,
+                },
+            },
+        },
+        appBar: {
+            zIndex: theme.zIndex.drawer + 1,
+        },
+    
+    }));
+    
+    
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
 
+    
     const isMenuOpen = Boolean(anchorEl);
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -115,10 +117,11 @@ function Header({ auth, history }) {
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     {/* 메뉴 트리 */}
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    {/*
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" >
                         <MenuIcon />
                     </IconButton>
-
+                    */}
                     {/* 메뉴 이름 */}
                     <Typography variant="h6" className={classes.title}>
                         {menuName}
