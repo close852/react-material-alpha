@@ -7,13 +7,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { IconButton, InputBase, Menu, MenuItem, Badge } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 
 
 
 function Header({ auth, history }) {
 
-    const keyword = '';
+    const [keyword, setKeyword] = useState(null);
     const menuName = '메인화면';
     const useStyles = makeStyles(theme => ({
 
@@ -22,6 +21,7 @@ function Header({ auth, history }) {
         },
         title: {
             flexGrow: 1,
+            fontWeight: 'bold'
         },
         search: {
             position: 'relative',
@@ -62,16 +62,24 @@ function Header({ auth, history }) {
         },
         appBar: {
             zIndex: theme.zIndex.drawer + 1,
+            backgroundColor: '#ffcc00',
+            color: 'black',
         },
-    
+
     }));
-    
-    
+
+
+    const handleEnter = (event) => {
+        // setKeyword(event.currentTarget.value);
+        if (event.key === 'Enter') {
+            console.log('event.key', event.key, event.currentTarget.value);
+        }
+    }
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
 
-    
+
     const isMenuOpen = Boolean(anchorEl);
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -139,6 +147,7 @@ function Header({ auth, history }) {
                             }}
                             inputProps={{ 'aria-label': 'search' }}
                             value={keyword}
+                            onKeyDown={handleEnter}
                         />
                     </div>
                     {/* 사용자 정보 */}

@@ -12,8 +12,9 @@ import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
-function LeftMenu({ history }) {
+function RightMenu({ history }) {
 
     const drawerWidth = 240;
     const useStyles = makeStyles(theme => ({
@@ -43,35 +44,27 @@ function LeftMenu({ history }) {
 
     const menus = [
         {
-            menuGroup: "App",
+            menuGroup: "TopMenu",
             menuId: "qweasdasdasd1",
-            menuName: "문서작성",
-            sortno: 1,
-            link: '/app/forms',
-            count: 1
-        },
-        {
-            menuGroup: "App",
-            menuId: "qweasdasdasd1",
-            menuName: "미결함",
+            menuName: "전자결재",
             sortno: 1,
             link: '/app/todolist',
             count: 1
         },
         {
-            menuGroup: "App",
+            menuGroup: "TopMenu",
             menuId: "qweasdasdasd2",
-            menuName: "진행함",
+            menuName: "게시판",
             sortno: 1,
-            link: '/app/processlist',
+            link: '/bbs/list',
             count: 2
         },
         {
-            menuGroup: "App",
+            menuGroup: "TopMenu",
             menuId: "qweasdasdasd3",
-            menuName: "완료함",
+            menuName: "대화함",
             sortno: 1,
-            link: '/app/endlist',
+            link: '/app/todolist',
             count: 2
         },
     ]
@@ -87,6 +80,7 @@ function LeftMenu({ history }) {
                 classes={{
                     paper: classes.drawerPaper,
                 }}
+                anchor="right"
             >
                 <div className={classes.toolbar} />
                 <List>
@@ -98,35 +92,10 @@ function LeftMenu({ history }) {
                     ))}
                 </List>
                 <Divider />
-                {['보관함'].map((text, index) => (
+                {['강가을', '강민준', '김서준', '김현준', '나예준', '도주원', '박민재', '변현제', '신길동', '이시우', '주지호', '최준서', '최준우', '황하리'].map((text, index) => (
                     <div>
                         <ListItem button key={text} onClick={handleClick2}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                            {open2 ? <ExpandLess /> : <ExpandMore />}
-                        </ListItem>
-                        <Collapse in={open2} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItem button className={classes.nested}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="운영부문" />
-                                </ListItem>
-                                <ListItem button className={classes.nested}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="고객지원팀" />
-                                </ListItem>
-                            </List>
-                        </Collapse>
-                    </div>
-                ))}
-                {['접수함'].map((text, index) => (
-                    <div>
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                            <ListItemIcon><AccountCircle /> </ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     </div>
@@ -136,4 +105,4 @@ function LeftMenu({ history }) {
     )
 }
 
-export default LeftMenu
+export default RightMenu
