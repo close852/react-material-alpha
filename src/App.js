@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch } from 'react-router-dom'
 import { Header, LeftMenu, Footer } from 'containers'
-import { SignIn, SignUp, Open } from 'components';
+import { SignIn, SignUp } from 'components';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,8 +39,6 @@ function App({ location }) {
                 <Switch>
                     <Route path="/signin" component={SignIn}></Route>
                     <Route path="/signup" component={SignUp}></Route>
-                    <Route path="/open" component={Open}></Route>
-
                 </Switch>
             </main>
             <footer className={classes.footer}>
