@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import App from './App';
 
+// Redux
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+import reducers from './reducers';
+
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
 ReactDOM.render(
-    <BrowserRouter>
-        <Switch>
-            <App />
-        </Switch>
-    </BrowserRouter>, document.getElementById('root'));
+    <Provider store={store}>
+        <BrowserRouter>
+            <Switch>
+                <App />
+            </Switch>
+        </BrowserRouter>
+    </Provider>, document.getElementById('root'));
 

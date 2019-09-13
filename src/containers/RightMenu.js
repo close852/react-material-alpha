@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -8,10 +8,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import Collapse from '@material-ui/core/Collapse';
-import StarBorder from '@material-ui/icons/StarBorder';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+// import Collapse from '@material-ui/core/Collapse';
+// import StarBorder from '@material-ui/icons/StarBorder';
+// import ExpandLess from '@material-ui/icons/ExpandLess';
+// import ExpandMore from '@material-ui/icons/ExpandMore';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 function RightMenu({ history }) {
@@ -45,7 +45,7 @@ function RightMenu({ history }) {
     const menus = [
         {
             menuGroup: "TopMenu",
-            menuId: "qweasdasdasd1",
+            menuId: "menu1",
             menuName: "전자결재",
             sortno: 1,
             link: '/app/todolist',
@@ -53,7 +53,7 @@ function RightMenu({ history }) {
         },
         {
             menuGroup: "TopMenu",
-            menuId: "qweasdasdasd2",
+            menuId: "menu2",
             menuName: "게시판",
             sortno: 1,
             link: '/bbs/list',
@@ -61,7 +61,7 @@ function RightMenu({ history }) {
         },
         {
             menuGroup: "TopMenu",
-            menuId: "qweasdasdasd3",
+            menuId: "menu3",
             menuName: "대화함",
             sortno: 1,
             link: '/app/todolist',

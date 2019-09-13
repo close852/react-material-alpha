@@ -15,38 +15,29 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 
-function createData(id, formname, title, draftuser, draftdate) {
-    return { id, formname, title, draftuser, draftdate };
+function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-    createData('1','India', 'IN', 1324171354, 3287263),
-    createData('2','China', 'CN', 1403500365, 9596961),
-    createData('3','Italy', 'IT', 60483973, 301340),
-    createData('4','United States', 'US', 327167434, 9833520),
-    createData('5','Canada', 'CA', 37602103, 9984670),
-    createData('6','Australia', 'AU', 25475400, 7692024),
-    createData('7','Germany', 'DE', 83019200, 357578),
-    createData('8','Ireland', 'IE', 4857000, 70273),
-    createData('9','Mexico', 'MX', 126577691, 1972550),
-    createData('10','Japan', 'JP', 126317000, 377973),
-    createData('11','France', 'FR', 67022000, 640679),
-    createData('12','United Kingdom', 'GB', 67545757, 242495),
-    createData('13','Russia', 'RU', 146793744, 17098246),
-    createData('14','Nigeria', 'NG1', 200962417, 923768),
-    createData('15','Nigeria', 'NG2', 200962417, 923768),
-    createData('16','Brazil', 'BR1', 210147125, 8515767),
-    createData('17','Brazil', 'BR2', 210147125, 8515767),
-    createData('18','Brazil', 'BR3', 210147125, 8515767),
-    createData('19','Brazil', 'BR4', 210147125, 8515767),
-    createData('20','Brazil', 'BR5', 210147125, 8515767),
-    createData('21','Brazil', 'BR6', 210147125, 8515767),
-
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Donut', 452, 25.0, 51, 4.9),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Honeycomb', 408, 3.2, 87, 6.5),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Jelly Bean', 375, 0.0, 94, 0.0),
+    createData('KitKat', 518, 26.0, 65, 7.0),
+    createData('Lollipop', 392, 0.2, 98, 0.0),
+    createData('Marshmallow', 318, 0, 81, 2.0),
+    createData('Nougat', 360, 19.0, 9, 37.0),
+    createData('Oreo', 437, 18.0, 63, 4.0),
 ];
 
 function desc(a, b, orderBy) {
@@ -73,12 +64,12 @@ function getSorting(order, orderBy) {
     return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
 
-
 const headCells = [
-    { id: 'formname', numeric: false, disablePadding: true, label: '양식명',minWidth:'100px' ,align:'left' },
-    { id: 'title', numeric: true, disablePadding: false, label: '문서제목' ,minWidth:'300px' ,align:'left' },
-    { id: 'draftuser', numeric: true, disablePadding: false, label: '기안자',minWidth:'120px',align:'left' },
-    { id: 'draftdate', numeric: true, disablePadding: false, label: '기안일',minWidth:'120px',align:'left' },
+    { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+    { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+    { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+    { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+    { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
 ];
 
 function EnhancedTableHead(props) {
@@ -96,17 +87,14 @@ function EnhancedTableHead(props) {
                         checked={numSelected === rowCount}
                         onChange={onSelectAllClick}
                         inputProps={{ 'aria-label': 'select all desserts' }}
-                        style={{minWidth:'50px'}}
                     />
                 </TableCell>
                 {headCells.map(headCell => (
                     <TableCell
                         key={headCell.id}
-                        align={'center'}
+                        align={headCell.numeric ? 'right' : 'left'}
                         padding={headCell.disablePadding ? 'none' : 'default'}
                         sortDirection={orderBy === headCell.id ? order : false}
-                        style={{ minWidth: headCell.minWidth }}
-
                     >
                         <TableSortLabel
                             active={orderBy === headCell.id}
@@ -161,9 +149,6 @@ const useToolbarStyles = makeStyles(theme => ({
     title: {
         flex: '0 0 auto',
     },
-    tooltip:{
-        display:'flex',
-    }
 }));
 
 const EnhancedTableToolbar = props => {
@@ -180,34 +165,28 @@ const EnhancedTableToolbar = props => {
                 {numSelected > 0 ? (
                     <Typography color="inherit" variant="subtitle1">
                         {numSelected} selected
-                    </Typography>
+          </Typography>
                 ) : (
                         <Typography variant="h6" id="tableTitle">
-                            {menuName}
+                            Nutrition
           </Typography>
                     )}
             </div>
             <div className={classes.spacer} />
             <div className={classes.actions}>
-                {numSelected > 0 && (
-                <div className={classes.tooltip}>
-                    <Tooltip title="Print">
-                        <IconButton aria-label="print">
-                            print
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Update">
-                        <IconButton aria-label="update">
-                            update
-                        </IconButton>
-                    </Tooltip>
+                {numSelected > 0 ? (
                     <Tooltip title="Delete">
                         <IconButton aria-label="delete">
                             <DeleteIcon />
                         </IconButton>
                     </Tooltip>
-                </div>
-                ) }
+                ) : (
+                        <Tooltip title="Filter list">
+                            <IconButton aria-label="filter list">
+                                <FilterListIcon />
+                            </IconButton>
+                        </Tooltip>
+                    )}
             </div>
         </Toolbar>
     );
@@ -247,14 +226,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const menuName ="문서함"
 function BbsList() {
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    // const [dense, setDense] = React.useState(false);
+    const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     function handleRequestSort(event, property) {
@@ -263,10 +241,9 @@ function BbsList() {
         setOrderBy(property);
     }
 
-    //전체선택을 현재 페이지만 하도록 수정
     function handleSelectAllClick(event) {
         if (event.target.checked) {
-            const newSelecteds = rows.map(n => n.id);
+            const newSelecteds = rows.map(n => n.name);
             setSelected(newSelecteds);
             return;
         }
@@ -302,9 +279,9 @@ function BbsList() {
         setPage(0);
     }
 
-    // function handleChangeDense(event) {
-    //     setDense(event.target.checked);
-    // }
+    function handleChangeDense(event) {
+        setDense(event.target.checked);
+    }
 
     const isSelected = name => selected.indexOf(name) !== -1;
 
@@ -318,8 +295,7 @@ function BbsList() {
                     <Table
                         className={classes.table}
                         aria-labelledby="tableTitle"
-                        size={'medium'}
-                        stickyHeader
+                        size={dense ? 'small' : 'medium'}
                     >
                         <EnhancedTableHead
                             classes={classes}
@@ -334,47 +310,44 @@ function BbsList() {
                             {stableSort(rows, getSorting(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.id);
+                                    const isItemSelected = isSelected(row.name);
                                     const labelId = `enhanced-table-checkbox-${index}`;
 
                                     return (
                                         <TableRow
                                             hover
-                                            onClick={event => handleClick(event, row.id)}
+                                            onClick={event => handleClick(event, row.name)}
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.id}
+                                            key={row.name}
                                             selected={isItemSelected}
                                         >
                                             <TableCell padding="checkbox">
                                                 <Checkbox
                                                     checked={isItemSelected}
                                                     inputProps={{ 'aria-labelledby': labelId }}
-                                                    style={{minWidth:'50px'}}
                                                 />
                                             </TableCell>
-                                            {headCells.map(column => {
-                                                const value = row[column.id];
-                                                return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                    </TableCell>
-                                                );
-                                            })}
+                                            <TableCell component="th" id={labelId} scope="row" padding="none">
+                                                {row.name}
+                                            </TableCell>
+                                            <TableCell align="right">{row.calories}</TableCell>
+                                            <TableCell align="right">{row.fat}</TableCell>
+                                            <TableCell align="right">{row.carbs}</TableCell>
+                                            <TableCell align="right">{row.protein}</TableCell>
                                         </TableRow>
                                     );
                                 })}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell colSpan={5} />
+                                    <TableCell colSpan={6} />
                                 </TableRow>
                             )}
                         </TableBody>
                     </Table>
                 </div>
                 <TablePagination
-                    labelRowsPerPage="목록갯수 :"
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
                     count={rows.length}
@@ -390,6 +363,10 @@ function BbsList() {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
+            <FormControlLabel
+                control={<Switch checked={dense} onChange={handleChangeDense} />}
+                label="Dense padding"
+            />
         </div>
     );
 }

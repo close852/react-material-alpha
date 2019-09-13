@@ -6,13 +6,13 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { IconButton, InputBase, Menu, MenuItem, Badge } from '@material-ui/core';
+import { IconButton, InputBase, Menu, MenuItem } from '@material-ui/core';
 
 
 
 function Header({ auth, history }) {
 
-    const [keyword, setKeyword] = useState(null);
+    const [keyword] = useState(null);
     const menuName = '메인화면';
     const useStyles = makeStyles(theme => ({
 

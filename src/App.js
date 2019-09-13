@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route, Switch } from 'react-router-dom'
-<<<<<<< HEAD
-import { Header, LeftMenu, Footer } from 'containers'
-import { SignIn, SignUp } from 'components';
-=======
 import { Header, LeftMenu, RightMenu, Footer } from 'containers'
 import { SignIn, SignUp, AppList, BbsList, FormList } from 'components';
->>>>>>> 9801e44a9aee0e859e3af291dea2a40075ae788f
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
 
     root: {
