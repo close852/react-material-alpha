@@ -6,22 +6,22 @@ import 'containers/Footer.css'
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="#">
-                Your Websitess
-      </Link>{' '}
+            {'Copyright '}
             {new Date().getFullYear()}
             {'.'}
+            <Link color="inherit" href="#">
+                Mirage.W inc.
+      </Link>{'All rights reserved.'}
         </Typography>
     );
 }
 
-
 export default function Footer() {
     return (
-                <Container maxWidth="sm">
-                    <Typography variant="body1" align="center">My sticky footer can be found here.</Typography>
-                    <Copyright />
-                </Container>
+        <Container maxWidth="sm">
+            <Typography variant="body1" align="center">
+                <Copyright />
+            </Typography>
+        </Container>
     );
 }
