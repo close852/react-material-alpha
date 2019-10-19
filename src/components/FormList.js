@@ -1,73 +1,49 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {NavLink} from 'react-router-dom'
 import PropTypes from 'prop-types';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
-import TreeView from '@material-ui/lab/TreeView';
-import TreeItem from '@material-ui/lab/TreeItem';
-import Collapse from '@material-ui/core/Collapse';
-import { useSpring, animated } from 'react-spring';
-import { AppList } from '.';
+import {  makeStyles } from '@material-ui/core/styles';
+import TreeNav from '../tree/TreeNav'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
-function MinusSquare(props) {
-    return (
-        <SvgIcon fontSize="inherit" {...props}>
-            {/* tslint:disable-next-line: max-line-length */}
-            <path d="M22.047 22.074v0 0-20.147 0h-20.12v0 20.147 0h20.12zM22.047 24h-20.12q-.803 0-1.365-.562t-.562-1.365v-20.147q0-.776.562-1.351t1.365-.575h20.147q.776 0 1.351.575t.575 1.351v20.147q0 .803-.575 1.365t-1.378.562v0zM17.873 11.023h-11.826q-.375 0-.669.281t-.294.682v0q0 .401.294 .682t.669.281h11.826q.375 0 .669-.281t.294-.682v0q0-.401-.294-.682t-.669-.281z" />
-        </SvgIcon>
-    );
+
+
+/*RIGHT TREE DATA */
+const items = [
+    {
+        id: '*', label: '문서함', depth: 1, sort: 1, ref: '10',
+        children: [
+            {
+                id: '11', label: '일반양식', depth: 1, sort: 1, ref: '10',
+            },
+            {
+                id: '12', label: '근태양식', depth: 1, sort: 1, ref: '10',
+            }
+        ]
+    }
+];
+
+/*LEFT 테이블 HEADER */
+const columns = [
+    { id: 'formgroup', label: '양식함', align: 'center', minWidth: 50 },
+    { id: 'formname', label: '양식명', align: 'center', minWidth: 200 },
+    { id: 'description', label: '설명', align: 'center', minWidth: 400 },
+];
+
+/* LEFT 테이블 DATA*/
+const rows = [
+    createData('FORM1','11','일반양식','기안문', ''),
+    createData('FORM2','12','근태양식','근태신청서', ''),
+
+];
+
+
+function createData(formid,groupid,formgroup, formname, description) {
+    return { formid,groupid,formgroup, formname, description };
 }
-
-function PlusSquare(props) {
-    return (
-        <SvgIcon fontSize="inherit" {...props}>
-            {/* tslint:disable-next-line: max-line-length */}
-            <path d="M22.047 22.074v0 0-20.147 0h-20.12v0 20.147 0h20.12zM22.047 24h-20.12q-.803 0-1.365-.562t-.562-1.365v-20.147q0-.776.562-1.351t1.365-.575h20.147q.776 0 1.351.575t.575 1.351v20.147q0 .803-.575 1.365t-1.378.562v0zM17.873 12.977h-4.923v4.896q0 .401-.281.682t-.682.281v0q-.375 0-.669-.281t-.294-.682v-4.896h-4.923q-.401 0-.682-.294t-.281-.669v0q0-.401.281-.682t.682-.281h4.923v-4.896q0-.401.294-.682t.669-.281v0q.401 0 .682.281t.281.682v4.896h4.923q.401 0 .682.281t.281.682v0q0 .375-.281.669t-.682.294z" />
-        </SvgIcon>
-    );
-}
-
-function CloseSquare(props) {
-    return (
-        <SvgIcon className="close" fontSize="inherit" {...props}>
-            {/* tslint:disable-next-line: max-line-length */}
-            <path d="M17.485 17.512q-.281.281-.682.281t-.696-.268l-4.12-4.147-4.12 4.147q-.294.268-.696.268t-.682-.281-.281-.682.294-.669l4.12-4.147-4.12-4.147q-.294-.268-.294-.669t.281-.682.682-.281.696 .268l4.12 4.147 4.12-4.147q.294-.268.696-.268t.682.281 .281.669-.294.682l-4.12 4.147 4.12 4.147q.294.268 .294.669t-.281.682zM22.047 22.074v0 0-20.147 0h-20.12v0 20.147 0h20.12zM22.047 24h-20.12q-.803 0-1.365-.562t-.562-1.365v-20.147q0-.776.562-1.351t1.365-.575h20.147q.776 0 1.351.575t.575 1.351v20.147q0 .803-.575 1.365t-1.378.562v0z" />
-        </SvgIcon>
-    );
-}
-
-function TransitionComponent(props) {
-    const style = useSpring({
-        from: { opacity: 0, transform: 'translate3d(20px,0,0)' },
-        to: { opacity: props.in ? 1 : 0, transform: `translate3d(${props.in ? 0 : 20}px,0,0)` },
-    });
-
-    return (
-        <animated.div style={style}>
-            <Collapse {...props} />
-        </animated.div>
-    );
-}
-
-TransitionComponent.propTypes = {
-    /**
-     * Show the component; triggers the enter or exit states
-     */
-    in: PropTypes.bool,
-};
-
-
-const StyledTreeItem = withStyles(theme => ({
-    iconContainer: {
-        '& .close': {
-            opacity: 0.3,
-        },
-    },
-    group: {
-        marginLeft: 12,
-        paddingLeft: 12,
-        borderLeft: `1px dashed ${fade(theme.palette.text.primary, 0.4)}`,
-    },
-}))(props => <TreeItem {...props} TransitionComponent={TransitionComponent} />);
 
 
 const drawerWidth = 240;
@@ -83,44 +59,79 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-between'
     },
     tree: {
+        border: '1px solid black',
+        width:'calc(30%)',
+        height:'calc(50%)'
 
     },
     formlist: {
-        width: '100%'
+        border: '1px solid black',
+        width:'calc(70%)',
+        height:'calc(50%)'
+    },
+    link:{
+        textDecoration:'none',
+        color:'black'
     }
 }));
 
+
+
 function FormList() {
     const classes = useStyles();
+    const [group,setGroup] =useState((items[0].children && items[0].children[0].id) || '*');
 
+
+    const handleForms = (id) => {
+        setGroup(id);
+    }
     return (
         <div className={classes.root}>
+            {/*LEFT*/}
             <div className={classes.tree}>
-                <TreeView
-                    defaultExpanded={['1']}
-                    defaultCollapseIcon={<MinusSquare />}
-                    defaultExpandIcon={<PlusSquare />}
-                    defaultEndIcon={<CloseSquare />}
-                >
-                    <StyledTreeItem nodeId="1" label="Main">
-                        <StyledTreeItem nodeId="2" label="Hello" />
-                        <StyledTreeItem nodeId="3" label="Subtree with children">
-                            <StyledTreeItem nodeId="6" label="Hello" />
-                            <StyledTreeItem nodeId="7" label="Sub-subtree with children">
-                                <StyledTreeItem nodeId="9" label="Child 1" />
-                                <StyledTreeItem nodeId="10" label="Child 2" />
-                                <StyledTreeItem nodeId="11" label="Child 3" />
-                            </StyledTreeItem>
-                            <StyledTreeItem nodeId="8" label="Hello" />
-                        </StyledTreeItem>
-                        <StyledTreeItem nodeId="4" label="World" />
-                        <StyledTreeItem nodeId="5" label="Something something" />
-                    </StyledTreeItem>
-                </TreeView>
+                <TreeNav items={items} onHandle={handleForms}/>
             </div>
-            <div className={classes.formList}>
-                <AppList />
+            {/*RIGHT*/}
+            <div className={classes.formlist}>
+                <Table stickyHeader>
+                    <TableHead>
+                        <TableRow>
+                            {columns.map(column => (
+                                <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                >
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.filter(data=>data.groupid == group).map(row => {
+                            return (
+                                <TableRow hover  tabIndex={-1} key={row.id}>
+                                    {columns.map(column => {
+                                        const value = row[column.id];
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {
+                                                    (column.id==="formname" && 
+                                                    <NavLink to={`/app/forms/${row.formid}`} className={classes.link}>
+                                                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                    </NavLink>
+                                                    ) || (column.format && typeof value === 'number' ? column.format(value) : value)
+                                                }
+                                                </TableCell>
+                                        );
+                                    })}
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
             </div>
+            
         </div>
     );
 }
